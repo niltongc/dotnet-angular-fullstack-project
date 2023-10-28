@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddDbContext<ExtractDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ExtractConnectionString")));
 
-builder.Services.AddScoped<ILauchRepository, SQLLauchRepository>();
+builder.Services.AddScoped<ITransactionRepository, SQLTransactionRepository>();
 
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 

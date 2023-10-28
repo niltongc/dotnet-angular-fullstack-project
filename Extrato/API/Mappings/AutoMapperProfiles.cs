@@ -8,7 +8,8 @@ namespace Extrato.API.Mappings
     {
         public AutoMapperProfiles() 
         {
-            CreateMap<AddLauchDTO, Extract>().ReverseMap();
+            CreateMap<AddTransactionDTO, Extract>().ReverseMap();
+            CreateMap<UpdateTransactionDTO, Extract>().ReverseMap();
         }
     }
 }
