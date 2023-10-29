@@ -1,0 +1,35 @@
+<ng-container *ngIf="transactions$ | async as transactions">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Date and Time</th>
+        <th>Value</th>
+        <th>Is AdHoc</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let extract of transactions">
+        <td>{{ extract.description }}</td>
+        <td>{{ extract.dateTime | date:"dd/MM/yyyy HH:mm" }}</td>
+        <td>{{ extract.value }}</td>
+        <td>{{ extract.isAdHoc ? 'Yes' : 'No' }}</td>
+        <!--<td>{{ extract.status }}</td>-->
+        <td>{{ extract.status === 0 ? 'Valid' : 'Canceled' }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+<div>
+  <label for="startDate">Data de Início:</label>
+  <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+
+  <label for="endDate">Data de Término:</label>
+  <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
+
+  <button (click)="getTransactionsByDate()">Consultar</button>
+</div>
+
+

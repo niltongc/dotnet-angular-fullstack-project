@@ -34,7 +34,7 @@ namespace Extrato.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransactions(DateTime startDate, DateTime endDate)
         {
-            if (startDate == DateTime.MinValue && startDate == DateTime.MinValue)
+            if (startDate == DateTime.MinValue && endDate == DateTime.MinValue)
             {
                 // Se o valor padrão DateTime.MinValue for fornecido, defina-o para DateTime.UtcNow.AddDays(-2).
                 startDate = DateTime.UtcNow.AddDays(-2);
