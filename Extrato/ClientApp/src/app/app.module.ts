@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ViewComponent } from './transaction/view/view.component';
 import { AddTransactionComponent } from './transaction/add-transaction/add-transaction.component';
+import { SumValidTransactionComponent } from './transaction/sum-valid-transaction/sum-valid-transaction.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { AddTransactionComponent } from './transaction/add-transaction/add-trans
     CounterComponent,
     FetchDataComponent,
     ViewComponent,
-    AddTransactionComponent
+    AddTransactionComponent,
+    SumValidTransactionComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -30,7 +32,8 @@ import { AddTransactionComponent } from './transaction/add-transaction/add-trans
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      {path: 'transaction', component: ViewComponent}
+      { path: 'transaction', component: ViewComponent },
+      {path: 'new-transaction', component: AddTransactionComponent}
     ])
   ],
   providers: [],

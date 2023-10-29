@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Extract } from '../../models/extract.model';
 import { TransactionService } from '../../services/transaction.service';
@@ -14,7 +15,7 @@ export class ViewComponent {
   startDate: Date; 
   endDate: Date;
 
-  constructor(private transactionService: TransactionService) {
+  constructor(private transactionService: TransactionService, private router: Router) {
     this.startDate = new Date();
     this.endDate = new Date();
 }
@@ -32,6 +33,10 @@ export class ViewComponent {
     console.log(this.startDate)
     console.log(this.endDate)
     this.transactions$ = this.transactionService.getTransactionsByDate(this.startDate, this.endDate);
+  }
+
+  addNewTransaction() {
+    this.router.navigateByUrl('new-transaction');
   }
  
 

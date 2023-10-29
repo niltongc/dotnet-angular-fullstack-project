@@ -23,13 +23,17 @@
 </ng-container>
 
 <div>
-  <label for="startDate">Data de Início:</label>
+  <label for="startDate">Start Date:</label>
   <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
 
-  <label for="endDate">Data de Término:</label>
+  <label for="endDate">End Date:</label>
   <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
 
-  <button (click)="getTransactionsByDate()">Consultar</button>
+  <button (click)="getTransactionsByDate()">Search</button>
+</div>
+
+<div>
+  <button (click)="addNewTransaction()">Add New Transaction</button>
 </div>
 
 
