@@ -13,10 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Extract", Version = "v1" });
-});
+//builder.Services.AddSwaggerGen(c =>
+//{
+//    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Extract", Version = "v1" });
+//});
 
 builder.Services.AddDbContext<ExtractDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("ExtractConnectionString")));
@@ -27,12 +27,22 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseHsts();
+    //app.UseSwagger();
+    //app.UseSwaggerUI();
 
 }
+
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseHsts();
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+
+//}
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

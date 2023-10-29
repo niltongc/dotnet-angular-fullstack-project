@@ -64,5 +64,47 @@ namespace Extrato.API.Repositories.Implementation
 
             return existingTransaction;
         }
+
+        public async Task<Extract> CancelTransaction(Guid id, Extract extract)
+        {
+            var existingTransaction = await dbcontext.Extracts.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (existingTransaction == null) 
+            {
+                return null;
+            }
+
+            existingTransaction.Status = extract.Status;
+
+            await dbcontext.SaveChangesAsync();
+
+            return existingTransaction;
+        }
+
+        public async Task<decimal> SumTransactions()
+        {
+            var sumTransaction = await dbcontext.Extracts.Where(x => x.Status == 0).SumAsync(x => x.Value);
+
+            return sumTransaction;
+        }
+
+        public async Task<Extract> CreateTransactionNotAdHoc()
+        {
+            Extract extract = new Extract();
+
+            Random randomNumber = new Random();
+            var num = (decimal)randomNumber.NextDouble() * 1000;
+
+            extract.Id = Guid.NewGuid();
+            extract.Description = DateTime.UtcNow.ToString("yyyy-MM-dd") + " Not Ad Hoc";
+            extract.IsAdHoc = false;
+            extract.Status = 0;
+            extract.Value = Math.Round(num, 2);
+
+            await dbcontext.SaveChangesAsync();
+
+            return extract;
+            
+        }
     }
 }

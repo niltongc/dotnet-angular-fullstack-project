@@ -10,6 +10,7 @@ namespace Extrato.API.Mappings
         {
             CreateMap<AddTransactionDTO, Extract>().ReverseMap();
             CreateMap<UpdateTransactionDTO, Extract>().ReverseMap();
+            CreateMap<UpdateStatusTransactionDTO, Extract>().ReverseMap();
         }
     }
 }

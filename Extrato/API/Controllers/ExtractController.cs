@@ -80,5 +80,39 @@ namespace Extrato.API.Controllers
 
             return Ok(extractDomainModel);
         }
+
+        [HttpPut]
+        [Route("cancel-transaction/{id:Guid}")]
+        public async Task<IActionResult> CancelTransaction([FromRoute] Guid id,[FromBody] UpdateStatusTransactionDTO updateSatusTransactionsDTO)
+        {
+            var extractDomainModel = mapper.Map<Extract>(updateSatusTransactionsDTO);
+
+            extractDomainModel = await transactionRepository.CancelTransaction(id, extractDomainModel);
+
+            if(extractDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(extractDomainModel);
+        }
+
+        [HttpGet]
+        [Route("sum-transaction")]
+        public async Task<IActionResult> SumTransactions()
+        {
+            var sumTransactions = await transactionRepository.SumTransactions();
+
+            return Ok(sumTransactions);
+        }
+
+        [HttpPost]
+        [Route("not-adhoc")]
+        public async Task<IActionResult> TransactionNotAdHoc()
+        {
+            var notAdHoc = await transactionRepository.CreateTransactionNotAdHoc();
+
+            return Ok(notAdHoc);
+        }
     }
 }

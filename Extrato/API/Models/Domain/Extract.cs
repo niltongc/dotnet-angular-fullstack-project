@@ -1,6 +1,6 @@
 ﻿namespace Extrato.API.Models.Domain
 {
-    public enum LaunchStatus
+    public enum TransactionStatus
     {
         Valid,
         Canceled
@@ -12,6 +12,6 @@
         public DateTime DateTime { get; set; } = DateTime.UtcNow;
         public decimal Value { get; set; }
         public bool IsAdHoc { get; set; }
-        public LaunchStatus Status { get; set; } = LaunchStatus.Valid;
+        public TransactionStatus Status { get; set; } = TransactionStatus.Valid;
     }
 }
