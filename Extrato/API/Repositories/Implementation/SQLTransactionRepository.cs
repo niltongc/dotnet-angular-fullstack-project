@@ -60,6 +60,7 @@ namespace Extrato.API.Repositories.Implementation
             existingTransaction.DateTime = extract.DateTime;
             existingTransaction.Value = extract.Value;
 
+
             await dbcontext.SaveChangesAsync();
 
             return existingTransaction;
@@ -101,6 +102,7 @@ namespace Extrato.API.Repositories.Implementation
             extract.Status = 0;
             extract.Value = Math.Round(num, 2);
 
+            await dbcontext.AddAsync(extract);
             await dbcontext.SaveChangesAsync();
 
             return extract;

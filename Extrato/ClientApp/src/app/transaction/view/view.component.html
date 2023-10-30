@@ -8,6 +8,7 @@
         <th>Is AdHoc</th>
         <th>Status</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -18,8 +19,15 @@
         <td>{{ extract.isAdHoc ? 'Yes' : 'No' }}</td>
         <td>{{ extract.status === 0 ? 'Valid' : 'Canceled' }}</td>
         <td>
+
           <a class="btn btn-light" [ngClass]="{'disabled-link': extract.status !== 0}" *ngIf="extract.status === 0"
              [routerLink]="['/update-date-value', extract.id]">Edit</a>
+        </td>
+
+        <td>
+          <a class="btn btn-danger" [ngClass]="{'disabled-link': extract.status !== 0}" *ngIf="extract.status === 0" (click)="cancelTransaction(extract.id)">Cancel</a>
+
+
         </td>
       </tr>
     </tbody>
@@ -29,6 +37,7 @@
 <app-sum-valid-transaction></app-sum-valid-transaction>
 
 <div class="d-flex justify-content-around mt-3">
+  <h3>Search for new range of date</h3>
   <label for="startDate">Start Date:</label>
   <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
   <label for="endDate">End Date:</label>
@@ -36,8 +45,10 @@
   <button class="btn btn-primary" (click)="getTransactionsByDate()">Search</button>
 </div>
 
-<div>
+<div class="d-flex justify-content-around mt-3">
   <button class="btn btn-primary" (click)="addNewTransaction()">Add New Transaction</button>
+  <button class="btn btn-primary" (click)="addAutomaticTransaction()">Auto Transaction</button>
+ 
 </div>
 
 

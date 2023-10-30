@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
 import { AddExtractModel } from '../models/add-extract.model';
 import { Extract } from '../models/extract.model';
+import { ExtractCancel } from '../models/extractCancel.model';
 import { UpdateValueOrDate } from '../models/update-value-date-extract.model';
 
 @Injectable({
@@ -42,7 +43,17 @@ export class TransactionService {
   }
 
   updateDateOfValue(id: string, updateValeuOrDate: UpdateValueOrDate): Observable<Extract> {
-    console.log(`in service: ${updateValeuOrDate.dateTime}`)
+    
     return this.http.put<Extract>(`${environment.apiBaseUrl}/api/Extract/${id}`, updateValeuOrDate);
+  }
+
+  cancelTransaction(id: string, status: ExtractCancel): Observable<Extract> {
+    
+    return this.http.put<Extract>(`${environment.apiBaseUrl}/api/Extract/cancel-transaction/${id}`, status)
+  }
+
+  addAutomaticTransaction(): Observable<void> {
+    console.log("add init")
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Extract/not-adhoc`, {});
   }
 }
