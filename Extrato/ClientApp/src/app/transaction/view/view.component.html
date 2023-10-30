@@ -7,6 +7,7 @@
         <th>Value</th>
         <th>Is AdHoc</th>
         <th>Status</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -15,25 +16,28 @@
         <td>{{ extract.dateTime | date:"dd/MM/yyyy HH:mm" }}</td>
         <td>{{ extract.value }}</td>
         <td>{{ extract.isAdHoc ? 'Yes' : 'No' }}</td>
-        <!--<td>{{ extract.status }}</td>-->
         <td>{{ extract.status === 0 ? 'Valid' : 'Canceled' }}</td>
+        <td>
+          <a class="btn btn-light" [ngClass]="{'disabled-link': extract.status !== 0}" *ngIf="extract.status === 0"
+             [routerLink]="['/update-date-value', extract.id]">Edit</a>
+        </td>
       </tr>
     </tbody>
   </table>
 </ng-container>
 
-<div>
+<app-sum-valid-transaction></app-sum-valid-transaction>
+
+<div class="d-flex justify-content-around mt-3">
   <label for="startDate">Start Date:</label>
   <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
-
   <label for="endDate">End Date:</label>
   <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
-
-  <button (click)="getTransactionsByDate()">Search</button>
+  <button class="btn btn-primary" (click)="getTransactionsByDate()">Search</button>
 </div>
 
 <div>
-  <button (click)="addNewTransaction()">Add New Transaction</button>
+  <button class="btn btn-primary" (click)="addNewTransaction()">Add New Transaction</button>
 </div>
 
 

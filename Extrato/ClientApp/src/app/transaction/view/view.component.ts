@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Extract } from '../../models/extract.model';
 import { TransactionService } from '../../services/transaction.service';
+
 
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
-export class ViewComponent {
+export class ViewComponent implements OnInit {
 
   transactions$?: Observable<Extract[]>;
   startDate: Date; 

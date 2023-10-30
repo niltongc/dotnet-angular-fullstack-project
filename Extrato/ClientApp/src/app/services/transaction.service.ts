@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.prod';
 import { AddExtractModel } from '../models/add-extract.model';
 import { Extract } from '../models/extract.model';
+import { UpdateValueOrDate } from '../models/update-value-date-extract.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,13 +23,26 @@ export class TransactionService {
     //automatic https://localhost:7061/api/Extract/not-adhoc
 
   getTransactionsDefault(): Observable<Extract[]> {
-    return this.http.get<Extract[]>(`${environment.apiBaseUrl}/api/Extract`)
+    return this.http.get<Extract[]>(`${environment.apiBaseUrl}/api/Extract`);
   }
   getTransactionsByDate(startDate: Date, endDate: Date): Observable<Extract[]> {
-    return this.http.get<Extract[]>(`${environment.apiBaseUrl}/api/Extract?startDate=${startDate}&endDate=${endDate}`)
+    return this.http.get<Extract[]>(`${environment.apiBaseUrl}/api/Extract?startDate=${startDate}&endDate=${endDate}`);
   }
 
   addTransaction(model: AddExtractModel): Observable<void> {
-    return this.http.post<void>(`${environment.apiBaseUrl}/api/Extract`, model)
+    return this.http.post<void>(`${environment.apiBaseUrl}/api/Extract`, model);
+  }
+
+  sumValidTransaction(): Observable<number> {
+    return this.http.get<number>(`${environment.apiBaseUrl}/api/Extract/sum-transaction`);
+  }
+
+  getTransactionById(id: string): Observable<Extract> {
+    return this.http.get<Extract>(`${environment.apiBaseUrl}/api/Extract/${id}`)
+  }
+
+  updateDateOfValue(id: string, updateValeuOrDate: UpdateValueOrDate): Observable<Extract> {
+    console.log(`in service: ${updateValeuOrDate.dateTime}`)
+    return this.http.put<Extract>(`${environment.apiBaseUrl}/api/Extract/${id}`, updateValeuOrDate);
   }
 }
